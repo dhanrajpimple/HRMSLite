@@ -7,7 +7,17 @@ import { AttendanceCalendarModal } from '../components/attendance/AttendanceCale
 import { EmptyState } from '../components/ui/EmptyState';
 import type { Employee } from '../types';
 
-const StatCard = ({ title, value, icon: Icon, colorClass, bgColorClass }: any) => (
+import type { LucideIcon } from 'lucide-react';
+
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  icon: LucideIcon;
+  colorClass: string;
+  bgColorClass: string;
+}
+
+const StatCard = ({ title, value, icon: Icon, colorClass, bgColorClass }: StatCardProps) => (
   <div className="rounded-3xl border border-slate-800 bg-slate-900/50 p-7 shadow-2xl backdrop-blur-xl hover:border-slate-700 transition-all group overflow-hidden relative">
     <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity">
       <Icon size={120} />

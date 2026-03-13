@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as employeeApi from '../api/employees';
 import { toast } from 'react-hot-toast';
-import type { ApiError } from '../types';
+import type { ApiError, Employee } from '../types';
 
 export const useEmployees = () => {
   return useQuery({
@@ -35,7 +35,7 @@ export const useCreateEmployee = () => {
 export const useUpdateEmployee = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, data }: { id: string; data: any }) => employeeApi.updateEmployee(id, data),
+    mutationFn: ({ id, data }: { id: string; data: Partial<Omit<Employee, 'id' | 'createdAt'>> }) => employeeApi.updateEmployee(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['employees'] });
       toast.success('Employee updated successfully');

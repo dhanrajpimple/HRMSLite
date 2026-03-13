@@ -70,7 +70,7 @@ export const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                 <UserIcon className="h-5 w-5" />
               </div>
               <div className="flex-1 overflow-hidden">
-                <p className="truncate text-sm font-semibold text-white">Dhanraj Pimple</p>
+                <p className="truncate text-sm font-semibold text-white">Admin User</p>
                 <p className="truncate text-[10px] uppercase tracking-wider text-slate-500 font-bold">Administrator</p>
               </div>
             </div>

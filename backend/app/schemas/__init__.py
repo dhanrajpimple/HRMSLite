@@ -1,10 +1,17 @@
 from app.schemas.attendance import AttendanceCreate, AttendanceResponse
-from app.schemas.common import DashboardStats, ErrorDetail, ErrorResponse
-from app.schemas.employee import VALID_DEPARTMENTS, EmployeeCreate, EmployeeResponse
+from app.schemas.common import BaseSchema, DashboardStats, ErrorDetail, ErrorResponse
+from app.schemas.employee import (
+    VALID_DEPARTMENTS,
+    EmployeeCreate,
+    EmployeeResponse,
+    EmployeeUpdate,
+)
 
 __all__ = [
+    "BaseSchema",
     "VALID_DEPARTMENTS",
     "EmployeeCreate",
+    "EmployeeUpdate",
     "EmployeeResponse",
     "AttendanceCreate",
     "AttendanceResponse",
@@ -12,3 +19,4 @@ __all__ = [
     "ErrorResponse",
     "DashboardStats",
 ]
+

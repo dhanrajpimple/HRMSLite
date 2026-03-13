@@ -1,4 +1,6 @@
+# ──────────────────────────────────────────────
 # Python
+# ──────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
@@ -8,7 +10,7 @@ venv/
 .venv/
 env/
 
-# Environment files
+# Environment files (never commit secrets)
 .env
 .env.*
 !.env.example
@@ -26,14 +28,20 @@ build/
 dist/
 *.egg-info/
 
-# IDE/OS
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
+# Dev-only scripts & output
+backend/alter_output.txt
+backend/run_alter.py
+
+# ──────────────────────────────────────────────
+# Node / Frontend
+# ──────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -41,20 +49,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# ──────────────────────────────────────────────
+# IDE / OS
+# ──────────────────────────────────────────────
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-

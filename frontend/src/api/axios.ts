@@ -8,19 +8,31 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 15_000,
 });
+
+interface ApiErrorDetail {
+  field: string;
+  message: string;
+}
 
 api.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    const data = error.response?.data;
+    const data = error.response?.data as Record<string, unknown> | undefined;
     const apiError: ApiError = {
-      message: data?.error || data?.message || error.message || 'An unexpected error occurred',
+      message:
+        (data?.error as string) ||
+        (data?.message as string) ||
+        error.message ||
+        'An unexpected error occurred',
       status: error.response?.status,
-      errors: data?.details?.map((d: any) => ({
-        field: d.field,
-        message: d.message
-      })),
+      errors: (data?.details as ApiErrorDetail[] | undefined)?.map(
+        (d: ApiErrorDetail) => ({
+          field: d.field,
+          message: d.message,
+        })
+      ),
     };
 
     if (import.meta.env.DEV) {
