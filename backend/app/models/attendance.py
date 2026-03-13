@@ -34,4 +34,5 @@ class Attendance(Base):
         nullable=False,
     )
 
-    employee = relationship("Employee", backref="attendance_records")
+    # Use back_populates for consistency with the Employee model
+    employee = relationship("Employee", back_populates="attendance_records")

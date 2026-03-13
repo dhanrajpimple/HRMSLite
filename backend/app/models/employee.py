@@ -5,7 +5,7 @@ from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, String
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
@@ -37,4 +37,13 @@ class Employee(Base):
         default=lambda: datetime.now(UTC),
         onupdate=lambda: datetime.now(UTC),
         nullable=False,
+    )
+
+    # Relationship to attendance records with cascading delete.
+    # passive_deletes is False (default) to ensure SQLAlchemy manually 
+    # removes attendance records even if the DB constraint is missing.
+    attendance_records = relationship(
+        "Attendance",
+        back_populates="employee",
+        cascade="all, delete-orphan",
     )

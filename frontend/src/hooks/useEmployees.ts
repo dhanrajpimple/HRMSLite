@@ -18,6 +18,7 @@ export const useCreateEmployee = () => {
     mutationFn: employeeApi.createEmployee,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['employees'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
       toast.success('Employee added successfully');
     },
     onError: (error: ApiError) => {
@@ -38,6 +39,8 @@ export const useUpdateEmployee = () => {
     mutationFn: ({ id, data }: { id: string; data: Partial<Omit<Employee, 'id' | 'createdAt'>> }) => employeeApi.updateEmployee(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['employees'] });
+      queryClient.invalidateQueries({ queryKey: ['attendance'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
       toast.success('Employee updated successfully');
     },
     onError: (error: ApiError) => {
@@ -58,6 +61,8 @@ export const useDeleteEmployee = () => {
     mutationFn: employeeApi.deleteEmployee,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['employees'] });
+      queryClient.invalidateQueries({ queryKey: ['attendance'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard-stats'] });
       toast.success('Employee deleted successfully');
     },
     onError: (error: ApiError) => {
