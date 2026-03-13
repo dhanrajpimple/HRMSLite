@@ -1,0 +1,131 @@
+@import "tailwindcss";
+@import "react-calendar/dist/Calendar.css";
+
+@theme {
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary-50: #f8fafc;
+  --color-primary-100: #f1f5f9;
+  --color-primary-200: #e2e8f0;
+  --color-primary-300: #cbd5e1;
+  --color-primary-400: #94a3b8;
+  --color-primary-500: #64748b;
+  --color-primary-600: #475569;
+  --color-primary-700: #334155;
+  --color-primary-800: #1e293b;
+  --color-primary-900: #0f172a;
+  --color-primary-950: #020617;
+
+  /* Custom Premium Dark Palette */
+  --color-accent: #3b82f6;
+  --color-card-bg: #0f172a;
+  --color-sidebar-bg: #020617;
+  --color-app-bg: #020617;
+  --color-border-subtle: #1e293b;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--color-app-bg)] text-slate-200 font-inter antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-white font-bold tracking-tight;
+  }
+}
+
+/* Premium Styles Overrides */
+.glass {
+  @apply bg-slate-900/50 backdrop-blur-xl border border-white/5;
+}
+
+.table-row-hover {
+  @apply hover:bg-slate-800/50 transition-colors duration-200;
+}
+
+/* React Calendar Premium Dark Theme */
+.react-calendar {
+  @apply w-full border-none bg-slate-950 text-slate-200 rounded-3xl overflow-hidden font-inter p-4 shadow-2xl;
+}
+
+.react-calendar__tile {
+  @apply relative aspect-square flex flex-col items-center justify-center p-2 rounded-2xl transition-all duration-300 hover:bg-white/5 border-2 border-transparent;
+}
+
+.react-calendar__tile abbr {
+  @apply text-sm font-bold z-10 transition-transform duration-300;
+}
+
+.react-calendar__tile:hover abbr {
+  @apply scale-110;
+}
+
+.react-calendar__tile--now {
+  @apply border-blue-500/30 bg-blue-500/5;
+}
+
+.react-calendar__tile--now abbr {
+  @apply text-blue-400 font-black;
+}
+
+.react-calendar__tile--active {
+  @apply border-white/20 bg-white/10 shadow-inner;
+}
+
+.react-calendar__tile--active abbr {
+  @apply text-white scale-110;
+}
+
+/* Attendance Status "Blocks" */
+.calendar-tile-present {
+  @apply !bg-emerald-500/20 !border-emerald-500/40;
+}
+.calendar-tile-present abbr {
+  @apply !text-emerald-400;
+}
+
+.calendar-tile-absent {
+  @apply !bg-rose-500/20 !border-rose-500/40;
+}
+.calendar-tile-absent abbr {
+  @apply !text-rose-400;
+}
+
+.calendar-tile-holiday {
+  @apply !bg-blue-500/20 !border-blue-500/40;
+}
+.calendar-tile-holiday abbr {
+  @apply !text-blue-400;
+}
+
+.react-calendar__navigation {
+  @apply mb-6 flex gap-2;
+}
+
+.react-calendar__navigation button {
+  @apply min-w-[44px] h-12 bg-white/5 text-white font-bold hover:bg-white/10 rounded-xl transition-all;
+}
+
+.react-calendar__month-view__weekdays {
+  @apply uppercase font-black text-[10px] tracking-widest text-slate-600 py-4 mb-2;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+  @apply no-underline;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  @apply text-rose-400/50;
+}
+
+@layer utilities {
+  .calendar-tile-present {
+    @apply !bg-emerald-500/20 !text-emerald-400 font-bold rounded-lg border !border-emerald-500/30 shadow-[0_0_15px_rgba(16,185,129,0.1)];
+  }
+  .calendar-tile-absent {
+    @apply !bg-rose-500/20 !text-rose-400 font-bold rounded-lg border !border-rose-500/30 shadow-[0_0_15px_rgba(244,63,94,0.1)];
+  }
+  .calendar-tile-holiday {
+    @apply !bg-blue-500/20 !text-blue-400 font-bold rounded-lg border !border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.1)];
+  }
+}

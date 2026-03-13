@@ -1,0 +1,47 @@
+2026-03-13 13:43:19,673 INFO sqlalchemy.engine.Engine select pg_catalog.version()
+2026-03-13 13:43:19,674 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-03-13 13:43:20,086 INFO sqlalchemy.engine.Engine select current_schema()
+2026-03-13 13:43:20,086 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-03-13 13:43:20,496 INFO sqlalchemy.engine.Engine show standard_conforming_strings
+2026-03-13 13:43:20,496 INFO sqlalchemy.engine.Engine [raw sql] {}
+2026-03-13 13:43:20,907 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-03-13 13:43:20,909 INFO sqlalchemy.engine.Engine ALTER TABLE employees ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE;
+2026-03-13 13:43:20,909 INFO sqlalchemy.engine.Engine [generated in 0.00036s] {}
+2026-03-13 13:43:21,322 INFO sqlalchemy.engine.Engine ROLLBACK
+Traceback (most recent call last):
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DuplicateColumn: column "is_active" of relation "employees" already exists
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\interview\pythonfullstack\backend\run_alter.py", line 5, in <module>
+    conn.execute(text("ALTER TABLE employees ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE;"))
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2353, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "E:\interview\pythonfullstack\backend\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 924, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.DuplicateColumn) column "is_active" of relation "employees" already exists
+
+[SQL: ALTER TABLE employees ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT TRUE;]
+(Background on this error at: https://sqlalche.me/e/20/f405)
