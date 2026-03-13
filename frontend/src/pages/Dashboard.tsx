@@ -65,7 +65,7 @@ const Dashboard = () => {
   } = useAttendance();
 
   const todayRecords = attendance.filter(record => 
-    record.date === today && record.employee?.isActive !== false
+    record.date === today && record.employee && record.employee.isActive === true
   );
 
 

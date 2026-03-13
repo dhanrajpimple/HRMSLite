@@ -7,7 +7,7 @@ export const useAttendance = (employeeId?: string, month?: number, year?: number
   return useQuery({
     queryKey: ['attendance', employeeId, month, year],
     queryFn: () => attendanceApi.getAttendance(employeeId, month, year),
-    staleTime: 30000,
+    staleTime: 10000,
     retry: 2,
   });
 };
@@ -35,7 +35,7 @@ export const useDashboardStats = () => {
   return useQuery({
     queryKey: ['dashboard-stats'],
     queryFn: attendanceApi.getDashboardStats,
-    staleTime: 30000,
+    staleTime: 10000,
     retry: 2,
   });
 };
