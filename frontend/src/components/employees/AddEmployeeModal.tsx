@@ -57,16 +57,15 @@ export const AddEmployeeModal = ({ isOpen, onClose }: AddEmployeeModalProps) => 
       },
       onError: (error: ApiError) => {
         if (error.errors) {
-          Object.keys(error.errors).forEach((key) => {
-            const messages = error.errors?.[key];
-            if (messages && messages.length > 0) {
-              setError(key as keyof FormData, {
-                message: messages[0]
+          error.errors.forEach((err) => {
+            if (err.field) {
+              setError(err.field as keyof FormData, {
+                message: err.message,
               });
             }
           });
         }
-      }
+      },
     });
   };
 

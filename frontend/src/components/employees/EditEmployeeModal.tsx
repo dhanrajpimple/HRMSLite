@@ -7,7 +7,7 @@ import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Button } from '../ui/Button';
 import { useUpdateEmployee } from '../../hooks/useEmployees';
-import type { Employee, Department } from '../../types';
+import type { Employee, Department, ApiError } from '../../types';
 
 const schema = z.object({
   employeeId: z.string().min(1, 'Employee ID is required'),
@@ -43,6 +43,7 @@ export const EditEmployeeModal = ({ isOpen, onClose, employee }: EditEmployeeMod
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors }
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -62,11 +63,25 @@ export const EditEmployeeModal = ({ isOpen, onClose, employee }: EditEmployeeMod
 
   const onSubmit = (data: FormData) => {
     if (!employee) return;
-    updateEmployee({ id: employee.id, data }, {
-      onSuccess: () => {
-        onClose();
+    updateEmployee(
+      { id: employee.id, data },
+      {
+        onSuccess: () => {
+          onClose();
+        },
+        onError: (error: ApiError) => {
+          if (error.errors) {
+            error.errors.forEach((err) => {
+              if (err.field) {
+                setError(err.field as keyof FormData, {
+                  message: err.message,
+                });
+              }
+            });
+          }
+        },
       }
-    });
+    );
   };
 
   return (
